@@ -1,0 +1,44 @@
+[
+  {
+    "Asset_Name": "Monospecific Mangrove Reflectance CSV",
+    "Role_in_Paper": "Training tabular data for MLP models",
+    "Format": "CSV (1,605,681 rows, 10 bands)",
+    "Released": true,
+    "Local_Status": "Available (data/raw/DataBase_Sentinel_2_Mangrove_LaMancha.csv)"
+  },
+  {
+    "Asset_Name": "EML Dataset Metadata",
+    "Role_in_Paper": "Dataset provenance & variable definitions",
+    "Format": "XML (EML v2.2.0)",
+    "Released": true,
+    "Local_Status": "Available (data/raw/Sentinel_2_satellite_reflectance_of_monospecific.xml)"
+  },
+  {
+    "Asset_Name": "Sentinel-2 La Mancha Full Scene GeoTIFF",
+    "Role_in_Paper": "Spatial raster for mapping binary & multiclass distributions (Figs 7-9)",
+    "Format": "GeoTIFF / JP2 raster",
+    "Released": false,
+    "Local_Status": "UNRELEASED / NOT AVAILABLE"
+  },
+  {
+    "Asset_Name": "UAV Drone Orthophoto (3.5 cm resolution)",
+    "Role_in_Paper": "Ground truth visual baseline from 5,435 drone shots (Fig 3, Figs 7-9)",
+    "Format": "High-resolution GeoTIFF",
+    "Released": false,
+    "Local_Status": "UNRELEASED / NOT AVAILABLE"
+  },
+  {
+    "Asset_Name": "QGIS Species Ground Truth Polygons",
+    "Role_in_Paper": "Digitized boundaries of monospecific stands & mixed mangroves",
+    "Format": "Shapefile / GeoPackage",
+    "Released": false,
+    "Local_Status": "UNRELEASED / NOT AVAILABLE"
+  },
+  {
+    "Asset_Name": "Arroyo Moreno Sentinel-2 Scene & Maps",
+    "Role_in_Paper": "Spatial generalization site evaluation (Fig 10)",
+    "Format": "GeoTIFF raster & field points",
+    "Released": false,
+    "Local_Status": "UNRELEASED / NOT AVAILABLE"
+  }
+]

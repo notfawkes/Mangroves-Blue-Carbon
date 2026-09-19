@@ -1,0 +1,959 @@
+Page count: 14
+--- PAGE 1 ---
+Ecological Informatics 85 (2025) 102961
+Contents lists available at ScienceDirect
+Ecological Informatics
+journal homepage: www.elsevier.com/locate/ecolinf
+An approach for accurate identification and monitoring of species in
+mangrove forests based on multi-source spectral data and deep learning
+Monterrubio-Martínez Erandi a
+, Trujillo-Acatitla Rubicel b,c
+, Tuxpan-Vargas Jos´
+e a,d,
+*
+Moreno-Casasola Patricia e
+,
+a Divisi´
+on de Geociencias Aplicadas, Instituto Potosino de Investigaci´
+on Científica y Tecnol´ ogica A.C, Camino a la Presa de San Jos´
+e No. 2055, Colonia Lomas 4ta
+Secci´
+on, San Luis Potosí, San Luis Potosí 78216, M´ exico
+b Centro Nacional de Superc´
+omputo, Instituto Potosino de Investigaci´
+on Científica y Tecnol´ ogica A.C, Camino a la Presa de San Jos´
+e No. 2055. Colonia Lomas 4ta
+Secci´
+on, San Luis Potosí, San Luis Potosí 78216, M´ exico
+c Grupo de Ciencia e Ingeniería Computacionales, Instituto Potosino de Investigaci´
+on Científica y Tecnol´ ogica A.C, Camino a la Presa de San Jos´
+e No. 2055. Colonia
+Lomas 4ta Secci´
+on, San Luis Potosí, San Luis Potosí 78216, M´ exico
+d Investigador por M´ exico, CONAHCYT, M´ exico
+e Instituto de Ecología, A.C, Carretera antigua a Coatepec 351, El Haya, 91073 Xalapa, Veracruz, M´ exico
+A R T I C L E I N F O
+Keywords:
+Mapping
+Mangrove detection
+Mangrove species segmentation
+Multisource spectral data
+Deep learning
+A B S T R A C T
+The mangroves conservation is essential due to the wide range of goods and ecosystem services. Despite their
+importance, mangrove distribution has drastically decreased in recent decades, highlighting the need to
+enhanced conservation efforts through innovative monitoring methods. Accordingly, this study presents an
+approach that integrates remote sensing data in a study area with a diverse range of ecological scenarios,
+comprising monospecific mangrove forests, which are dominated by a single species and mixed mangroves with
+flooded freshwater forested wetlands. First, the integration of photogrammetric analysis from unmanned aerial
+vehicles (UAVs) enables the precise determination of the spatial distribution of mangrove forests. Furthermore,
+the multispectral data obtained from the Sentinel-2 satellite was employed for the training of multilayer perceptron
+models (MLP) that are capable of accurately mapping mixed and monospecific mangrove forests. The
+computational experiments for MLP models involve different number of neurons and hidden layers. The best
+models for detecting mangrove forest achieved an accuracy of 99.95 % for training and 99.8 % for test, while for
+monospecific mangrove forest, at the species level, it attained an accuracy of 98.73 % for training and 96.84 %
+for test, in both cases the models demonstrated a great performance test for segmentation of different kind of
+mangrove forests. By leveraging multi-source data and the capabilities of remote sensing and artificial intelligence
+technologies, this approach offers a groundbreaking solution for monitoring mangrove ecosystems. Also,
+this minimizes the economic and human efforts and reduces risk of error, thus leading to more efficient and
+effective ecosystem conservation.
+1. Introduction
+Mangroves are evergreen forests that are found in tropical and subtropical
+regions. The composition of mangrove forests can vary
+considerably, contingent on the presence, abundance, diversity and
+dominance of species. They may be classified as monospecific forests
+when a single mangrove species is predominant, or as mixed forests
+when multiple species are present, in conjunction with other wetland
+vegetation. In general, they can tolerate high salt levels and grow on soft
+substrates along the land-sea interface in intertidal environments such as
+coastlines, shallow lagoons, estuaries, rivers, and deltas. These ecosystems
+cover approximately 14.8 million hectares across 124 countries in
+Asia, America, Africa, and Oceania. Recent estimation suggests the existence
+of 50 to more than 70 mangrove species (FAO, 2007, 2023).
+Mangroves provide a variety of ecosystem services, including regulating,
+supporting, provisioning and cultural services. Regulating ecosystem
+services maintain essential ecological processes and are the life support
+system; supporting provide adequate space for animal and plant species
+* Corresponding author at: Divisi´
+on de Geociencias Aplicadas, Instituto Potosino de Investigaci´
+on Científica y Tecnol´ ogica A.C, Camino a la Presa de San Jos´
+e No.
+2055, Colonia Lomas 4ta Secci´
+on, San Luis Potosí, San Luis Potosí 78216, M´ exico.
+E-mail address: jose.tuxpan@ipicyt.edu.mx (T.-V. Jos´ e).
+https://doi.org/10.1016/j.ecoinf.2024.102961
+Received 29 July 2024; Received in revised form 14 December 2024; Accepted 15 December 2024
+Available online 19 December 2024
+1574-9541/© 2024 The Authors. Published by Elsevier B.V. This is an open access article under the CC BY-NC-ND license ( http://creativecommons.org/licenses/by-
+nc-nd/4.0/ ).
+--- PAGE 2 ---
+M.-M. Erandi et al. to live and develop, thus providing shelter and protection for the gene
+pool; provisioning refers to food for humans and animals, resource
+supply, raw materials, mineral, timber, medicinal, genetic and ornamental
+resources; and cultural refers to aesthetics, spirituality, cultural
+inspiration and art, as well as knowledge generation for cognitive
+development in education and science. They thus provide direct and
+indirect human benefits that can be valued at up to US $194,000 per
+hectare per year (Costanza et al., 2014; Moreno-Casasola, 2016).
+It is recognized that there has been a loss of mangrove forests
+worldwide. Since the beginning of the 21st century, approximately 4.3
+% of mangroves have been lost as a result of land use change for livestock,
+aquaculture, urbanization and tourism development (Moreno
+Casasola et al., 2002; Trouche et al., 2016). Consequently, numerous
+studies have concentrated on monitoring changes in mangrove forests at
+local, regional, and global scales since 1980 (CONABIO, 2016, 2021;
+FAO, 2023; L´ opez-Portillo and Ezcurra, 2002; Rodríguez-Zu˜ niga et al.,
+2013; Siikam¨ aki et al., 2012; Vel´
+azquez and Luna, 2007). The Food and
+Agriculture Organization (FAO) and the United Nations Environment
+Programme (UNEP) in collaboration with mangrove specialists worldwide,
+have estimated 15.2 million hectares in 2005, compared to an
+estimated total global mangrove area of 16.9 million hectares in 1990
+(FAO, 2007). Various methods have been used to determine the distribution
+of mangroves, such as aerial photography, field patrols, and
+satellite sensors such as Sentinel-2, Landsat, Pl´ eiades, WorldView 2,
+Spot, and Rapid Eye (Chopade et al., 2023; Rahmandhana et al., 2022;
+Trouche et al., 2016; Wang et al., 2018).
+Remote sensing has enabled the monitoring of mangroves at various
+scales by constantly gathering information from large areas and various
+electromagnetic spectrum ranges. According to the United Nations Office
+for Outer Space Affairs (UNOOSA), over 1000 earth observation
+satellites were operational in 2023 with different spatial, spectral, and
+temporal resolutions (Chuvieco, 2009; FAO, 2023; V´ azquez-Gonz´ alez
+et al., 2017).
+Although a significant proportion of this data is available at commercial
+prices, there are few free options. In the case of Mexico, a
+continuous monitoring program has been conducted every five years
+since 2005, utilizing the Moderate Resolution Imaging Spectroradiometer
+(MODIS) satellite system with a spatial resolution of 250 m to
+identify changes in mangrove vegetation and estimation for biomass
+(Rodríguez Zú˜ niga et al., 2018). Also, SPOT satellite imagery with a
+resolution of 10 m in the visible and infrared range were employed for
+the period from 2003 and stopped in 2007, due to the economic implications
+of doing so (CONABIO, 2009; Vel´ azquez-Salazar et al., 2021).
+This leads to considerable financial and human resource costs associated
+with monitoring, coupled with the inconsistency of multispectral data
+and spatial resolution when using different satellites that cannot be
+compared. However, some satellites, such as Landsat and Sentinel-2,
+provide free access and are often used in vegetation monitoring
+studies. Landsat has been providing data since the 1980s with a 16-day
+periodicity, 30-m spatial resolution and 10 bands at different wavelengths.
+Sentinel-2, launched almost a decade ago, provides images with
+a 10-day periodicity, a spatial resolution of up to 10 m and 12 bands at
+different wavelengths (Chopade et al., 2023; Cissell et al., 2017; Rahmandhana
+et al., 2022).
+Neverthless, new technologies such as artificial intelligence can now
+be used to improve monitoring methods (Avi˜ na-Hern´ andez et al., 2023;
+Jhonnerie et al., 2015). The fusion of multi-source data, including
+artificial intelligence and remote sensing technologies, can revolutionize
+data analysis (Janga et al., 2023). Artificial intelligence in remote
+sensing offers advantages such as improved data analysis capability,
+data quality, and accuracy, in this case, for mangrove classification and
+detection of cover changes. These methods have primarily been implemented
+in countries such as China, Australia, India, Thailand, Indonesia,
+Vietnam, among others (Janga et al., 2023; Pham et al., 2019; Vel´
+azquez-Salazar
+et al., 2021; Xia et al., 2020).
+Although remote sensing data and artificial intelligence have been
+Ecological Informatics 85 (2025) 102961
+studied extensively in other countries and methods have been shown to
+be effective, there is a paucity of implementation in countries such as
+Mexico, even though it is the fifth largest mangrove country in the world
+(Zu-Ermagassen and Spalding, 2021). Moreover, although it has been
+demonstrated that there are differences between species with respect to
+their spectral responses (Rahmandhana et al., 2022; Valderrama-Landeros
+et al., 2018), there is still a paucity of studies that explore the lack of
+specificity to create models that can identify distribution at the species
+level. This offers two potential avenues for further research: the opportunity
+to create models for unstudied regions and for species-level
+identification. Previous studies have investigated the potential of
+various deep learning artificial intelligence models, including neural
+networks, and have obtained excellent results (Ghorbanian et al., 2022;
+Kong et al., 2019; Wang et al., 2008). Therefore, the present study took
+the opportunity to implement the multilayer perceptron (MLP) model, a
+neuronal network interconnected in a layered structure. This model
+belongs to the category of machine learning and deep learning multiclass
+models, due to its ability to solve a range of problems, including
+those related to pixel-level classification and semantic segmentation,
+through its simple or complex configuration. The model comprises three
+layers: the input layer, which contains the data to be classified. Subsequently,
+the hidden layer that receives the data from the previous layer,
+which may be the input layer or another hidden layer. It then processes
+and transforms the information. Finally, the output layer, which provides
+the outcome of the network process(Russel and Norving, 2010).
+Since the beginning of the century until the present, these models
+have been used in some environmental issues that also use remote
+sensing data (Gross et al., 1999; Keiner and Yan, 1998; Kimes et al.,
+1996; Trujillo-Acatitla et al., 2022). In some countries, models for
+monitoring mangroves have been developed using different methods of
+artificial neuronal networks (ANN) using data from passive and active
+sensors (Rahmandhana et al., 2022; Wang et al., 2018; Zulfa et al.,
+2021). Multilayer perceptron is one of the most widely used ANN
+methods currently in use, as it is able to extract complex features that
+help improve classification compared to traditional methods (Chollet,
+2021; Goodfellow et al., 2017). The satellite data allows the identification
+of unique patterns in pixel values across multiple spectral bands
+representing different vegetation types (Chopade et al., 2023; Ghorbanian
+et al., 2022). In the case of the present study, we sought to achieve a
+more specific level, at the species level.
+Although these methods have been implemented in some parts of the
+world, further exploration is needed in Latin America and Mexico. It is
+important to consider development at different scales, as the species
+present in each region and their spectral responses differ. Integrating
+technology, remote sensing, fieldwork, and artificial intelligence can
+enhance ecological monitoring for preserving ecosystems such as mangroves.
+This article presents an innovative methodology that integrates
+unmanned aerial vehicle (UAV) and satellite data with artificial intelligence
+models to identify and monitor mangroves. Furthermore, this
+methodology is expected to offer a more efficient and effective monitoring
+solution, leading to reduced costs in terms of economic, human,
+and time resources. Additionally, to the fact that this approach can be
+extended to other types of vegetation, making it a valuable tool to
+address the Sustainable Development Goals of the 2030 Agenda. Specifically,
+it supports Goal 15, which aims to sustainably manage forests,
+that entails the protection and restoration of terrestrial ecosystems, the
+combating of desertification, the halting and reversal of land degradation,
+and the halting of biodiversity loss.
+2. Material and methods
+Fig. 1 shows the method employed to acquire and process data for
+the current study. The data was gathered from multiple sources,
+including drone and satellite sensors, to create binary and multiclass
+mangrove databases for deep-learning models to monitor mangroves.
+2
+--- PAGE 3 ---
+M.-M. Erandi et al. Ecological Informatics 85 (2025) 102961
+Fig. 1. Diagram of the method for the data acquisition with UAV to obtain a high-resolution map and used it as a base for creating a mangrove forest species mask, to
+extract then the spectral data from the satellite Sentinel-2. After this, an exploratory and statistical analysis was done with a one-way ANOVA and Tukey’s post-hoc
+test. Next, deep learning models of multilayer perceptron models were trained and validated. Finally, a model test was implemented to create a map of spatial
+distribution for monospecific and mixed mangrove forests to evaluate the performance of the models.
+2.1. Data acquisition
+To achieve a more precise estimation of the distribution of mangroves,
+field data of the actual distribution of each species was collected
+in La Mancha, Veracruz and Arroyo Moreno, Veracruz Fig. 2. The site of
+La Mancha (19◦35′ 12” N, 96◦23′ 09”W), Veracruz, Gulf of Mexico with
+9050 km2 is a priority mangrove conservation site that has been a study
+site for various researchers, producing maps and environmental data. It
+was chosen as a pilot site due to the presence of well-defined monospecific
+forests and easy accessibility to obtain control points for vegetation
+verification for high-quality data.
+A DJI Mavic Mini 2 UAV was used to conduct a zenithal drone shot of
+the area at an altitude of 100 m in July 2021. A total of 5435 photos were
+processed using the photogrammetry application Agisoft Metashape
+Professional (Version 1.8.5) to obtain an orthophoto of the mangrove
+forest area with the highest possible precision. Additionally, walking
+and boat trips were conducted to verify the distribution of mangrove
+species at 100 ground control points with a GPSMAP527. Later, polygons
+of updated masks of monospecific of red (Rhizophora mangle), black
+(Avicennia germinans) and white (Laguncularia racemosa) mangrove forest;
+and mixed mangroves with flooded freshwater forested wetlands
+were created using QGIS version 3.22.14, concerning the orthophoto
+and field verification points.
+Subsequently, a total of 147 cloud-free Sentinel-2 L1C image datasets
+of the period 2015–2021 were obtained from the Coopernicus Browser
+of the European Union’s Space programme and digital numbers were
+converted into surface reflectance values. Also, the red-edge bands
+(Band-5 0.705 μm, Band-6 0.740 μm, Band-7 0.783 μm and Band-8 A
+0.865 μm) and shortwave infrared bands (Band-11 1.610 μm and Band-
+12 2.190 μm) were resampling using the bilinear method with the rasterio
+package in Python 3.8.13 to achieve a spatial resolution of 10 m,
+such as the red, green, blue, and near-infrared bands.
+The created polygons of the distribution of the mangrove forest were
+used to extract the spectral information from the pixel values for each
+band. The dataset was then normalized and standardized using the
+standard scaler based on standard normally distributed data from Scikit
+learn 1.2.1 in Python 3.8.13. Two class-balanced databases were created
+using the TOA pixel values from Sentinel-2. The first one was a binary
+database containing 60,000 pixel data according to what is mangrove,
+where the mask of the three species were considered as one, and non-
+mangrove; the second was a multiclass database containing 40,000
+pixel data with four classes, created with each mask of the three species
+(R. mangle, L. racemosa, and A. germinans) and non-mangrove areas. The
+non-mangrove class was selected randomly from data belonging to
+different classes including rainforest, crops, water, urban, dunes, and
+other kind of wetlands.
+2.2. Exploratory and statistical analysis
+A simple variance analysis (One-Way ANOVA) was performed on
+each band to evaluate whether there was a significant difference between
+species. A Tukey’s post-hoc test was then conducted with a confidence
+interval of 95 % (α of 0.05) to identify which species were
+different. The bioinfokit v1 package in Python 3.8.13 was used for this
+process (Kutner et al., 2004).
+2.3. Multilayer perceptron for semantic segmentation
+The multilayer perceptron is the best known and most widely used
+type of neural network, whose architecture consists of multiple layers of
+interconnected neurons that could be used for a sub-pixel classification.
+It has non-linear activation functions, such as RELU, which allow it to
+recognize complex patterns in data. It also has optimization algorithms,
+such as ADAM, that improve model learning (Goodfellow et al., 2017).
+In this study, the initial model consisted of a single input and one
+output layer, with the sigmoid as the activation function, so that it could
+3
+--- PAGE 4 ---
+M.-M. Erandi et al. Ecological Informatics 85 (2025) 102961
+Fig. 2. Study area of La Mancha, Veracruz, Mexico.
+be interpreted as a logistic regression. Subsequently, various architectures
+were explored to determine the optimal configuration for the MLP
+model, ranging from one to five hidden layers, each one containing
+multiple neurons or neurons (5, 10, 20, 50, 100, 150, 300, 500). In all of
+them the relu activation function in the hidden layer was implemented,
+and ADAM was employed as the optimizer.
+The database used for the models includes reflectance data from the
+RGB bands (Band-2 0.490 μm, Band-3 0.560 μm, Band-4 0.665 μm),
+Vegetation Red Edge bands (Band-5 0.705 μm, Band-6 0.740 μm, Band-7
+0.783 μm), Near-Infrared bands (Band-8 0.842 μm and Band-8 A 0.865
+μm) and Short-wave Infrared bands (Band-11 1.610 μm and Band-12
+2.190 μm). Then the dataset was split into training and test sets using
+the train test split module of scikit-learn 1.2.1, with 70 % for training
+and 30 % for test.
+For the binary models, the binary crossentropy was used as the loss
+function and the sigmoid activation function in the output layer was
+used, this one produces values ranging from 0 to 1, where 0 represents
+the non-mangrove, and 1 represents mangrove. For the multiclass segmentation,
+multiclass cross-entropy was used as the loss function, and
+the softmax activation function in the output layer was used. The output
+layer of the multiclass models produces a probability for each class; the
+one with the highest probability is assigned to the corresponding class,
+0 for non-mangrove, 1 for red mangrove (R. mangle), 2 for black
+mangrove (A. germinans), 3 for white mangrove (L. racemosa).
+Finally, a recent image of Sentinel-2 was used to assess the models’
+performance test in La Mancha, where the acquisition data was taken
+and from Arroyo Moreno (19◦ 00′ 59”N, 96◦ 03′
+, 43”W), in Veracruz.
+3. Results
+The results of this study are presented below. Fig. 3 shows the high-
+resolution map obtained with a resolution of 3.5 cm and the masks
+created to represent the ground truth of mangrove species.
+3.1. Exploratory and statistical analysis
+Fig. 4 shows the boxplots for each band and species (R. mangle, A.
+germinans, and L. racemosa). The One-Way ANOVA and Tukey post-hoc
+test reveal a significant statistical difference between the species in all
+the cases (p-value <0.05). This indicates that there are variations in the
+spectral responses for each species, enabling distinctions to be made
+between monospecific forests.
+3.2. Multilayer perceptron models
+The binary MLP accuracies are shown in Fig. 5, where all of them
+exceed the 0.990. The lowest values were obtained in the logistic model,
+with a training accuracy of 0.9916 and a test accuracy of 0.9910. The
+MLP models with the highest scores were those of a hidden layer with
+300 neurons, achieving a training accuracy of 0.9995 and a test accuracy
+of 0.9988; two hidden layers with 100 neurons achieved a training accuracy
+of 0.9994 and a test accuracy of 0.9987; three hidden layers with
+50 neurons, achieved a training accuracy of 0.9996 and a test accuracy
+of 0.9987; four hidden layers with 150 and 300 neurons achieved a
+training accuracy of 0.9993 and a test accuracy of 0.9986; and finally,
+five hidden layers with 50 and 300 neurons achieved a training accuracy
+4
+--- PAGE 5 ---
+M.-M. Erandi et al. Ecological Informatics 85 (2025) 102961
+Fig. 3. Ortophoto and mangrove masks in La Mancha, Veracruz.
+of 0.9995 and a test accuracy of 0.9988. Upon comparison, the model
+comprising three hidden layers and 50 neurons demonstrated the most
+optimal scores across all.
+The multiclass MLP accuracies are shown in Fig. 6, all the models
+obtained accuracies over 0.90, except for the logistic model which obtained
+the lowest values, a training accuracy of 0.7670 and a test accuracy
+of 0.7684. The model with one hidden layer and 500 neurons
+achieved a training accuracy of 0.9110 and a test accuracy of 0.9065; the
+model with two hidden layers and 300 neurons achieved a training accuracy
+of 0.9575 and a test accuracy of 0.9436; the model with three
+hidden layers and 500 neurons achieved a training accuracy of 0.9863
+and a test accuracy of 0.9654, which had the highest accuracies; the
+model with four hidden layers and 300 neurons achieved a training
+accuracy of 0.9795 and a test accuracy of 0.9602; and finally, the model
+with five hidden layers and 300 neurons achieved a training accuracy of
+0.9873 and a test accuracy of 0.9684.
+3.3. Models test
+Fig. 7 shows the performance test of the spatial distribution of
+mangrove forest in binary models with the highest accuracies to validate
+them. The model of four hidden layers with 300 neurons was the most
+reliable, while the logistic model was the least reliable. It can be noted
+that, despite the similar accuracies, the performance in terms of spatial
+distribution markedly improves as the number of layers increases. When
+models with the same accuracy and number of layers are compared, the
+5
+--- PAGE 6 ---
+M.-M. Erandi et al. Ecological Informatics 85 (2025) 102961
+Fig. 4. Boxplot for each of the species (R. mangle, A. germinans, and L. racemosa) by band. In all the comparisons, there is a significant statistical difference between
+the species (p < 0.05).
+distribution is underestimated as the number of neurons increases. This
+is evident in the four-layer models with 150 and 300 neurons, as well as
+the five-layer models with 50 and 300 neurons. The models with the
+highest accuracies and comprising three or more layers had better performance
+when tested.
+The performance test of the spatial distribution of mangrove species
+in multiclass models with the highest accuracies to validate them are
+presented in Fig. 8, which contrasts with the previous models. However,
+once again, the model of four hidden layers with 300 neurons was the
+most reliable, while the logistic model was the least reliable. In general,
+R. mangle colored in red presented difficulties in differentiating itself
+from other classes, such as water, mixed forest mangrove and agricultural
+areas. Conversely, L. racemosa colored in grey exhibited an overestimation
+for the logistic model. In contrast, the performance of
+A. germinans colored in black was superior compared to the rest of the
+species.
+A detailed examination of the multiclass models revealed that,
+despite having a lower score, but exceeding 0.95, some models
+demonstrated more precise performance across all the species spatial
+distributions Fig. 9. The model of four hidden layers with 100 neurons
+achieved a training score of 0.9662 and a test score of 0.9528, whereas
+the one hidden layer with 150 neurons attained a training score of
+6
+--- PAGE 7 ---
+M.-M. Erandi et al. Ecological Informatics 85 (2025) 102961
+Fig. 5. Accuracy of training and test binary MLP models.
+0.9775 and a test score of 0.9607. Conversely, the model of five layers
+with 50 neurons achieved a training score of 0.9550 and a test score of
+0.9454, while the one with 150 neurons attained a training score of
+0.9810 and a test score of 0.9632. Of all models, the most reliable was
+the one of five hidden layers with 50 neurons.
+Finally, to assess the scalability and generalizability of the models,
+tests were carried out in other sites where mangrove distribution is
+known. A performance test was therefore conducted in Arroyo Moreno,
+Veracruz (Fig. 10), where the distribution of mangrove species has been
+previously described in other studies (L´ opez-Portillo et al., 2002) and
+where control points were taken for verification in the present study.
+The accuracy of the mangrove distribution models was remarkable but it
+should be mentioned that there is an overestimation with Rhizophora
+mangle. Nevertheless, the models demonstrated a robust approximation,
+with the four-layer models exhibiting superior performance compared to
+the five-layer models. However, taking into account the overestimates,
+again the most reliable of all models was the five hidden layer model
+with 50 neurons.
+4. Discussion
+Over time, several studies have used multispectral data from
+different satellites for vegetation monitoring, including the development
+of mangrove-specific indices such as Mangrove Vegetation Index (MVI)
+and Combined Mangrove Recognition Index (CMRI) (Chen et al., 2023;
+Roy et al., 2019; Tran et al., 2022). However, the results of the present
+study have shown that by exploiting the potential of the technologies
+together, given that there are spectral differences in the same bands
+between species, multispectral data can be used directly to identify
+mangrove distribution without the need for additional processing, such
+as the use of vegetation indices.
+Research on differences in spectral responses for mangroves has
+mainly been conducted in countries such as China, India, and the United
+States. However, there is a paucity of comprehensive studies on Latin
+American species in this field (Arun Prasad and Gnanappazham, 2014;
+Blasco et al., 1998; Rahmandhana et al., 2022; Zulfa et al., 2021). Avi˜
+na-
+Hern´ andez et al. (2023) is one of the few mangrove studies of Latin
+America that employ artificial intelligence, utilizing drone images
+within a spectral range of RGB and GRN (Green, Red and Near-infrared)
+with a maximum accuracy of 0.77, in comparison to the present studies,
+which exhibit a higher accuracy of over 0.90. Therefore, further research
+is necessary in Latin America, an area with high biodiversity and
+extensive mangrove areas, to better understand the region’s spectral
+responses to mangroves and its potential for the development of monitoring
+methods with artificial intelligence (Rahmandhana et al., 2022).
+Even though the mangrove forest in Mexico covers 60 % of the coastline
+there are few machine learning models developed for ecological applications
+and limited information on the spectral features of mangrove
+7
+--- PAGE 8 ---
+M.-M. Erandi et al. Ecological Informatics 85 (2025) 102961
+species in Mexico (Avi˜ na-Hern´ andez et al., 2023).
+However, it is important to assess the suitability of artificial intelligence
+models, focusing on species distribution at regional scales. In
+other countries, models of artificial intelligence have been well-
+developed, with species of mangroves distributed in different regions
+using data from multiple sensors (Rahmandhana et al., 2022; Wang
+et al., 2018; Xia et al., 2020). Nevertheless, the development of these
+methodologies requires fundamental consideration of the conditions,
+diversity and configuration of the ecosystems. According to some
+studies, mangroves appearances and spectral features vary depending on
+the region and species, making it challenging to generalize the models
+(Aji et al., 2023; Guo et al., 2021).
+It is possible that, given this situation, there are not many studies that
+address the identification of vegetation at the species level. For this
+reason, an advantage from the study area was taken since the presence of
+monospecific mangrove forests of the three predominant species of
+mangrove in Mexico. This offered an opportunity to obtain pure multispectral
+data for each species and to deepen our understanding of their
+specific spectral responses, in contrast to other locations where there is a
+mingling of patches with different mangrove dominance and compositions.
+In addition, many mangrove species are widely distributed
+throughout the world. The red mangrove (R. mangle) is found in 34
+countries, the black mangrove (A. germinans) in 38 countries and the
+white mangrove (L. racemosa) in 33 countries. Their distribution covers
+the continents of America and Africa, as well as island areas (Plants of
+Fig. 6. Accuracy of training and test multiclass MLP models.
+the World Online, 2024). Consequently, the artificial intelligence
+models developed in this study are applicable at a global level,
+extending beyond the scope of Mexico (Lacerda, 2002).
+This was used as an opportunity to develop two distinct models with
+the objective of creating a multi-purpose tool. The first model differentiates
+between mangrove and non-mangrove areas, regardless of the
+species, in order to be employed in ecosystems where mangroves co-
+occur with other vegetation. The second model was focused on monospecific
+forest mangrove to facilitate conservation decision-making or
+regeneration needs for specific species. In both cases, the models are
+applicable to Mexico and different regions of the world, where there are
+only a few studies employing similar methodologies (Avi˜ na-Hern´ andez
+et al., 2023; Cissell et al., 2017). Although studies in countries such as
+Iran and Vietnam have developed similar methods for mangrove identification
+(Ghorbanian et al., 2022; Xia et al., 2020; Zu-Ermagassen and
+Spalding, 2021), these have not been developed at the species level and
+cannot be generalized to other countries with different species
+compositions.
+The results demonstrated differences in performance between binary
+and multi-class models, which can be attributed to the inherent variability
+of the multispectral response, as previously pointed out by
+several authors (Arun Prasad and Gnanappazham, 2014; Zulfa et al.,
+2021). Also, the results indicated the necessity of assessing the efficacy
+of the models, as the highest accuracies did not necessarily yield the
+most accurate spatial distributions when testing the models. As
+8
+--- PAGE 9 ---
+M.-M. Erandi et al. Ecological Informatics 85 (2025) 102961
+Fig. 7. Binary model performance of the mangrove spatial distribution of the most accurate models at La Mancha, Veracruz. Mangrove area is colored in green. A)
+Ground truth from the mangrove distribution in La Mancha, Veracruz determined with the orthophoto and field verification points, the mixed mangrove represented
+in a lighter shade; B) Logistic Model; C) Model of One Hidden Layer with 300 neurons; D) Model of Two Hidden Layers with 100 neurons; E) Model of Three Hidden
+Layers with 50 neurons; F) Models of Four Hidden Layers 150 and 300 neurons; G) Models of Five Hidden Layers with 50 and 300 neurons. (For interpretation of the
+references to colour in this figure legend, the reader is referred to the web version of this article.)
+Kumaraperumal et al. (2022) points out, is it important to consider the
+nature of the datasets, the complexity and structure of the objects of
+study, such as mangroves. This given the importance of taking into account
+that the performance of a model is not necessarily guaranteed by a
+high accuracy, given the inevitable presence of biases that can affect its
+performance with new data, and needs to be addressed as mentioned by
+Chowdhury (2024).. In this case, some models, although obtaining high
+accuracy, showed errors in their performance and confusion with water.
+This could be due to the reflectance of mangrove, which has a higher
+moisture content than other vegetation types, making it difficult to
+distinguish in the analysis (Yang et al., 2022).
+Furthermore, in contrast to the typical community-level approach to
+mangrove monitoring, our models demonstrated the ability to accurately
+predict the distribution of monospecific and mixed mangroves, a
+scope that had not previously been attempted. The mixed mangrove
+described in this study has a complex composition with the presence of
+mangrove and low deciduous forest. According to multiclass models, the
+mixed mangrove is dominated by black mangrove (A. germinans) in the
+area closest to the lagoon, followed by the presence of white mangrove
+(L. racemosa) and, further south, red mangrove (R. mangle). Some studies
+mention the dominance of black mangrove (A. germinans) and white
+mangrove (L. racemosa) in this area, with the presence of flooded
+freshwater forested wetlands (L´ opez-Portillo et al., 2002). Others report
+the presence of secondary mangrove vegetation, also with a predominance
+of mainly black (A. germinans) and white (L. racemosa) mangrove
+(Environmental-Consultancy, 2022; Hern´ andez-Trejo et al., 2006). Red
+mangrove (R. mangle) dominance is also reported in some permanently
+flooded areas in the region (Environmental-Consultancy, 2022). This is
+consistent with the models and demonstrates the potential of multi-class
+models to identify mangrove species dominance, despite having mixed
+pixels with other vegetation types.
+In the multiclass models, the variability of the data increases, which
+makes them more sensitive in comparison to the binary models. In this
+sense, it is important to highlight that MLP model approximations can
+vary according to their architecture, and the comparison between the
+results in Figs. 8 and 9 shows that a model with fewer neurons can offer
+significant advantages in terms of simplicity, generalisation and effectiveness
+in finding relevant patterns with more efficient performance in
+identifying monospecific forests, thus avoiding overfitting (Hagan et al.,
+2014). This is therefore a demonstration of the potential of multi-class
+artificial intelligence models for the monitoring of species-specific distribution
+changes.
+With regard to the artificial intelligence methods employed, several
+studies have shown that ANN can achieve similar accuracies using algorithms
+such as RetinaNet (Chen et al., 2023; Ghorbanian et al., 2022)
+when using multispectral data from Sentinel-2. Other research indicates
+that incorporating multiple indices in the input features can significantly
+enhance and improve the models. However, this study only employed
+the original multispectral data and obtained better accuracies, which
+indicates that obtaining the data in its purest form for model training is
+preferable, rather than relying on indices (Guo et al., 2021; Maung and
+Sasaki, 2021).
+Although the National Commission for the Knowledge and Use of
+Biodiversity (CONABIO) in Mexico has implemented a mangrove
+monitoring program on a five-year cycle, a robust monitoring method
+for mangroves has not yet been fully developed. To date satellite images
+have been employed with a spatial resolution of 250 m, such as MODIS,
+others with a resolution of 30 m, such as Landsat, and with a resolution
+9
+--- PAGE 10 ---
+M.-M. Erandi et al. Ecological Informatics 85 (2025) 102961
+Fig. 8. Multiclass models performance of the highest accuracies models in La Mancha, Veracruz. Each colour corresponds to one of the species: the red mangrove
+(R. mangle) is colored in red, the black mangrove (A. germinans) is colored in black, and the white mangrove (L. racemosa) is colored in grey, everything that is not
+mangrove is colored in white and the mixed mangrove is colored in a lighter shade. A) Real mangrove distribution by species in La Mancha, Veracruz determined
+with the orthophoto and field verification points; B) Logistic Model; C) Model of One Hidden Layer with 500 neurons; D) Model of Two Hidden Layers with 300
+neurons; E) Model of Three Hidden Layers with 500 neurons; F) Models of Four Hidden Layers with 300 neurons; G) Models of Five Hidden Layers with 300 neurons.
+(For interpretation of the references to colour in this figure legend, the reader is referred to the web version of this article.)
+of 10 m, such as SPOT (European Space Agency, 2014). This has implications
+with respect to the modifiable areal unit problem, which
+consists of inconsistency in the analysis of results when using data at
+different scales (Jelinski and Wu, 1996). This problem can result in a
+significant variation when estimating the extent of mangroves in
+Mexico, causing a very certain overestimation or underestimation of the
+mangrove distribution, as data obtained at different scales may not be
+comparable. Despite this, the CONABIO has asserted that the accuracy of
+the mangrove cartography at a scale of 1:50,000 was estimated to be
+90.5 % (CONABIO, 2009) increasing to 95 % for more recent maps
+(Rodríguez-Zu˜ niga et al., 2013). The best models obtained in the present
+study achieved 99.8 % accuracy for binary models such as those
+described by CONABIO, and over 98 % of accuracy for the multiclass
+models. These models are therefore very useful for monitoring
+mangroves.
+Consequently, the present study proposes a solution involving the
+use of open access satellites such as Sentinel-2 data, widely used for
+monitoring vegetation worldwide, with a fine resolution of 10 m. This is
+suitable for vegetation monitoring in comparison to the satellite SPOT
+data, which has a significant economic cost and limited benefits in terms
+of spectral and spatial resolution. Furthermore, the proposed solution
+offers a reduction in the human effort required for field sampling, as well
+as the potential to reduce the human risks from fieldwork to determine
+changes after a natural disaster. Also, this is coupled with the opportunity
+to be extrapolated to any part of the world by integrating enough
+species-specific data.
+4.1. Considerations and future research
+Previously, mangrove monitoring was conducted through field surveys,
+light aircraft or helicopter flights, and the use of costly satellite
+imagery. However, technological advances have enabled the use of
+drones for high-spatial-resolution mapping and open-access satellites,
+such as Sentinel-2, for the acquisition of a vast quantity of multispectral
+data. This has the dual benefit of reducing economic costs, human effort
+and improving data quality. Furthermore, artificial intelligence models
+have demonstrated considerable potential for ecological applications in
+the monitoring of ecosystems such as mangroves.
+However, several factors warrant consideration. It has been
+demonstrated that there is variation in reflectance between species.
+Consequently, the pixel information in a satellite image may comprise a
+mixed composition of reflectances. It is therefore essential to consider
+this factor when interpreting the results of artificial intelligence models.
+This manifested as an erroneous classification of the red mangrove
+(R. mangle) as water in some multi-class models.
+Similarly, it is crucial to consider the composition of the ecosystems
+and the degree of generalisation inherent to the models. In the present
+study, mixed mangrove areas were considered; however, it should be
+noted that mangroves can vary in their reflectance depending on the
+presence, diversity and dominance of species. The present study has
+demonstrated the potential for mapping at a more specific level with
+these technologies. However, as knowledge of this is further developed
+and integrated, the method can be improved to other ecosystems and
+10
+--- PAGE 11 ---
+M.-M. Erandi et al. Ecological Informatics 85 (2025) 102961
+Fig. 9. Best multiclass models’ performance from La Mancha, Veracruz. Each colour corresponds to one of the species: the red mangrove (R. mangle) is colored in red,
+the black mangrove (A. germinans) is colored in black, and the white mangrove (L. racemosa) is colored in grey one, everything that is not mangrove is colored in
+white and the mixed mangrove is colored in a lighter shade. A) Real mangrove distribution by species in La Mancha, Veracruz determined with the orthophoto and
+field verification points; B) Model of Four Hidden Layer with 100 neurons; C) Model of Four Hidden Layer with 150 neurons; D) Model of Five Hidden Layers with 50
+neurons; E) Model of Five Hidden Layers with 150 neurons. (For interpretation of the references to colour in this figure legend, the reader is referred to the web
+version of this article.)
+extended to larger and larger regions.
+Finally, as a future work, it should be considered that the MLP
+models, which have shown certain errors in the detection of mangroves,
+could later opt for more advanced structures. This implies the use of
+segmentation models that incorporate contextual information in addition
+to spectral response values, based on convolutional neural networks
+(CNN) such as UNET.
+5. Conclusions
+The acquisition of data from multiple sources confers several advantages,
+which expand the possibilities beyond traditional monitoring
+methods, which are typically carried out using in situ measurements in
+the field to verify the ground truth, which incurs in high economic,
+human, and time costs. The use of UAVs offers the potential to obtain
+information on the distribution of mangroves in areas that are difficult
+to access. Conversely, multispectral data from optical satellites, such as
+Sentinel-2, is freely available and provides consistent information over
+time. Finally, the application of artificial intelligence algorithms as a
+novel tool has proven useful for differentiation vegetation down to the
+species level, which opens up new possibilities for mangrove monitoring,
+where the development and implementation of these new technologies
+is needed.
+This methodology may be employed as an alternative to monitoring
+monospecific and mixed mangrove forests, thereby affording the opportunity
+to identify areas of ecological vulnerability based on the
+condition of the mangroves. The objective of this study is to facilitate the
+monitoring of mangroves in Mexico and different regions of the world,
+thereby human risks from fieldwork through the implementation of
+remote monitoring. Furthermore, it is a cost-effective solution with high
+efficacy and efficiency, which will facilitate the implementation of long-
+term government programs aimed at achieving objectives such as
+mangrove mapping, conservation, and the enhancement of regeneration
+efficiency in the context of climate change and coastal vulnerability.
+Description of author’s responsibilities
+Erandi Monterrubio-Martínez: Research, field data acquisition,
+11
+--- PAGE 12 ---
+M.-M. Erandi et al. Ecological Informatics 85 (2025) 102961
+Fig. 10. Best binary and multiclass models’ performance from Arroyo Moreno, Veracruz. Each colour corresponds to one of the species: the red mangrove (R. mangle)
+is colored in red, the black mangrove (A. germinans) is colored in black, and the white mangrove (L. racemosa) is colored in grey, everything that is not mangrove is
+colored in white. A) Real mangrove distribution by species in Arroyo Moreno (L´ opez-Portillo and Ezcurra, 2002); B) Model of Four Hidden Layer with 100 neurons;
+C) Model of Four Hidden Layer with 150 neurons; D) Model of Five Hidden Layers with 50 neurons; E) Model of Five Hidden Layers with 150 neurons. (For
+interpretation of the references to colour in this figure legend, the reader is referred to the web version of this article.)
+creation of image dataset, data curation, method, formal analysis,
+implementation of Deep Learning Models, original draft writing – review
+and editing. Rubicel Trujillo-Acatitla: Research, field data acquisition,
+implementation of Deep Learning Models, data curation,
+visualization. Jos´
+e Tuxpan-Vargas: Research, conceptualization, validation,
+writing, revision and editing, project administration, visualization,
+supervision. Patricia Moreno-Casasola: Research,
+conceptualization, validation, writing, revision and editing, project
+administration, visualization, supervision.
+Declaration of competing interest
+The authors declare no competing monetary interests or personal
+relationships to influence the work presented here.
+Acknowledgements
+This research was supported by the Consejo Nacional de Humanidades,
+Ciencias y Tecnologías (CONAHCYT, https://conahcyt.mx/),
+through grant CVU: 699655. Funds for the field work were financed by
+the Proyectos Nacionales de Investigaci´
+on e Incidencia (PRONAII by its
+Spanish acronym) with the title “317526-Medidas integrales de
+adaptaci´
+on al cambio clim´ atico para la seguridad alimentaria en la costa
+central del Golfo de M´ exico” and “318956 Ecohidrología para la sustentabilidad
+y gobernanza del agua y cuencas para el bien común” given
+by the CONAHCYT. We thank the Divisi´
+on de Geociencias Aplicadas del
+Instituto Potosino de Investigaci´
+on Científica y Tecnol´ ogica A.C. (IPICYT,
+https://ipicyt.edu.mx/Geociencias_Aplicadas/areas_geocienci
+as_aplicadas.php), the Instituto de Ecología A.C. (https://www.inecol.
+mx/inecol/index.php/es/), the Grupo de Ciencia e Ingeniería Computacionales
+and the Centro Nacional de Superc´ omputo del Instituto
+Potosino de Investigaci´
+on Científica y Tecnol´ ogica A.C. for the Diploma
+en Inteligencia Artificial Aplicada (IPICYT, https://cic.mhc.ipicyt.edu.
+mx/).
+Data availability
+Data is open access able in https://knb.ecoinformatics.
+org/view/doi:10.5063/F1FN14P1
+and code will be made available upon request.
+12
+--- PAGE 13 ---
+M.-M. Erandi et al. References
+Aji, M.A.P., Kamal, M., Farda, N.M., 2023. Mangrove species mapping through
+phenological analysis using random forest algorithm on Google Earth engine.
+Remote Sens. Appl. Soc. Environ. 30 (October 2022), 100978. https://doi.org/
+10.1016/j.rsase.2023.100978.
+Arun Prasad, K., Gnanappazham, L., 2014. Species discrimination of mangroves using
+derivative spectral analysis. In: ISPRS Annals of the Photogrammetry, Remote
+Sensing and Spatial Information Sciences, II–8(December), pp. 45–52. https://doi.
+org/10.5194/isprsannals-ii-8-45-2014.
+Avi˜ na-Hern´ andez, J., Ramírez-Vargas, M., Roque-Sosa, F., Martínez-Rinc´
+on, R.O., 2023.
+Predictive performance of random forest on the identification of mangrove species in
+arid environments. Eco. Inform. 75 (January). https://doi.org/10.1016/j.
+ecoinf.2023.102040.
+Blasco, F., Gauquelin, T., Rasolofoharinoro, M., Denis, J., Aizpuru, M., Caldairou, V.,
+1998. Recent advances in mangrove studies using remote sensing data. Mar. Freshw.
+Res. 49 (4), 287–296. https://doi.org/10.1071/mf97153.
+Chen, Z., Zhang, M., Zhang, H., Liu, Y., 2023. Mapping mangrove using a red-edge
+mangrove index (REMI) based on Sentinel-2 multispectral images. IEEE Trans.
+Geosci. Remote Sens. 61. https://doi.org/10.1109/TGRS.2023.3323741.
+Chollet, F., 2021. Deep Learning with Python (2nd editio). https://www.manning.
+com/books/deep-learning-with-python-second-edition.
+Chopade, M.R., Mahajan, S., Chaube, N., 2023. Assessment of land use, land cover
+change in the mangrove forest of Ghogha area, gulf of Khambhat, Gujarat. Expert
+Syst. Appl. 212. https://doi.org/10.1016/j.eswa.2022.118839.
+Chowdhury, M.S., 2024. Comparison of accuracy and reliability of random forest,
+support vector machine, artificial neural network and maximum likelihood method
+in land use/cover classification of urban setting. Environ. Challeng. 14 (October
+2023), 100800. https://doi.org/10.1016/j.envc.2023.100800.
+Chuvieco, E., 2009. Fundamentals of Satellite Remote Sensing (A. Huete (ed.)).
+Cissell, J.R., Delgado, A.M., Sweetman, B.M., Steinberg, M.K., 2017. Monitoring
+mangrove forest dynamics in Campeche, Mexico, using Landsat satellite data.
+Remote Sens. Appl. Soc. Environ. 9, 60–68. https://doi.org/10.1016/j.
+rsase.2017.12.001.
+CONABIO (Ed.), 2009. Manglares de M´ exico : Extensi´
+on y distribuci´
+on (CONABIO (ed.);
+2A ed.).
+CONABIO, 2016. ‘Distribuci´
+on de los manglares en M´ exico en 2015’
+, escala: 1:50000.
+edici´
+on: 1. Comisi´
+on Nacional para el Conocimiento y Uso de la Biodiversidad.
+Sistema de Monitoreo de los Manglares de M´ exico (SMMM).
+CONABIO, 2021. ‘Distribuci´
+on de los manglares en M´ exico en 2020’
+, escala: 1:50000.
+edici´
+on: 1. Comisi´
+on Nacional para el Conocimiento y Uso de la Biodiversidad.
+Sistema de Monitoreo de los Manglares de M´ exico (SMMM).
+Costanza, R., de Groot, R., Sutton, P., van der Ploeg, S., Anderson, S.J., Kubiszewski, I.,
+Farber, S., Turner, R.K., 2014. Changes in the global value of ecosystem services.
+Glob. Environ. Chang. 26 (1), 152–158. https://doi.org/10.1016/j.
+gloenvcha.2014.04.002.
+Environmental-Consultancy, 2022. Proyecto Diada La Mancha -
+. Manifestaci´
+on de
+Impacto Ambiental.
+European Space Agency, 2014. SPOT Imagery User Guide.
+FAO, 2007. The World’s Mangroves 1980-2005, 153. FAO Forestry Paper, p. 89.
+FAO, 2023. The World’s Mangroves 2000–2020.
+Ghorbanian, A., Ahmadi, S.A., Amani, M., Mohammadzadeh, A., Jamali, S., 2022.
+Application of artificial neural networks for mangrove mapping using multi-
+temporal and multi-source remote sensing imagery. Water (Switzerland) 14 (2).
+https://doi.org/10.3390/w14020244.
+Goodfellow, I., Bengio, Y., Courville, A., 2017. Deep Learning (M. Press (ed.)). http
+://www.ieice.org/~prmu/jpn/ieice/ieice2017-1.pdf.
+Gross, L., Thiria, S., Frouin, R., 1999. Applying artificial neural network methodology to
+ocean color remote sensing. Ecol. Model. 120 (2–3), 237–246. https://doi.org/
+10.1016/S0304-3800(99)00105-2.
+Guo, M., Yu, Z., Xu, Y., Huang, Y., Li, C., 2021. Me-net: a deep convolutional neural
+network for extracting mangrove using sentinel-2A data. Remote Sens. 13 (7).
+https://doi.org/10.3390/rs13071292.
+Hagan, M.T., Demuth, H.B., Beale, M.H., De Jesús, O., 2014. Neural Network Design. In:
+Neural Networks in a Softcomputing Framework, 2nd ed. https://doi.org/10.1007/1-84
+628-303-5
+Hern´ andez-Trejo, H., Priego-Santander, A.G., L´ opez-Portillo, J.A., Isunza-Vera, E., 2006.
+Los paisajes físico-geogr´ aficos de los manglares de la laguna de la mancha. Veracruz,
+M´ exico.
+Janga, B., Asamani, G.P., Sun, Z., Cristea, N., 2023. A review of practical AI for remote
+sensing in Earth sciences. Remote Sens. 15 (16). https://doi.org/10.3390/
+rs15164112.
+Jelinski, D.E., Wu, J., 1996. The modifiable areal unit problem and implications for
+landscape ecology. Landsc. Ecol. 11 (3), 129–140. https://doi.org/10.1007/
+BF02447512.
+Jhonnerie, R., Siregar, V.P., Nababan, B., Prasetyo, L.B., Wouthuyzen, S., 2015. Random
+Forest classification for mangrove land cover mapping using Landsat 5 TM and Alos
+Palsar imageries. Procedia Environ. Sci. 24, 215–221. https://doi.org/10.1016/j.
+proenv.2015.03.028.
+Keiner, L.E., Yan, X.H., 1998. A neural network model for estimating sea surface
+chlorophyll and sediments from thematic mapper imagery. Remote Sens. Environ. 66
+(2), 153–165. https://doi.org/10.1016/S0034-4257(98)00054-6.
+Kimes, D.S., Holben, B.N., Nickeson, J.E., McKee, W.A., 1996. Extracting forest age in a
+Pacific northwest forest from thematic mapper and topographic data. Remote Sens.
+Environ. 56 (2), 133–140. https://doi.org/10.1016/0034-4257(95)00230-8.
+Ecological Informatics 85 (2025) 102961
+Kong, F.K.M.A., Osman, M.A., Zainon, W.M.N.W., Talib, A.Z., 2019. Multi-layer
+mangrove species identification. Adv. Intellig. Syst. Comput. 880 (January 2019),
+849–855. https://doi.org/10.1007/978-3-030-02686-8_63.
+Kumaraperumal, R., Pazhanivelan, S., Geethalakshmi, V., Nivas Raj, M.,
+Muthumanickam, D., Kaliaperumal, R., Shankar, V., Nair, A.M., Yadav, M.K., Tarun
+Kshatriya, T.V., 2022. Comparison of machine learning-based prediction of
+qualitative and quantitative digital soil-mapping approaches for eastern districts of
+Tamil Nadu, India. Land 11 (12). https://doi.org/10.3390/land11122279.
+Kutner, M.H., Nachtsheim, C.J., Neter, J., Li, W., 2004. Applied Linear Statistical Models.
+McGrawHill.
+Lacerda, L.D., 2002. Mangrove ecosystems function and management, (Vol. 10, Issue 1)..
+Springer-Verlag.
+L´ opez-Portillo, J., Ezcurra, E., 2002. Los manglares de M´ exico: una revisi´
+on. Madera y
+Bosques. Número Esp. 8, 27–51.
+L´ opez-Portillo, J., Martínez, M.L., Hesp, P., Hern´ andez Santana, J.R., V´ azquez-Reyes, V.
+M., G´ omez-Aguilar, L., M´ endez Linares, A.P., Jim´
+enez Orocio, O., Gachuz
+Delgado, S., 2002. Atlas de las costas de Veracruz Manglares y Dunas. Universidad
+Veracruzana.
+Maung, W.S., Sasaki, J., 2021. Assessing the natural recovery of mangroves after human
+disturbance using neural network classification and sentinel-2 imagery in wunbaik
+mangrove forest, Myanmar. Remote Sens. 13 (1), 1–24. https://doi.org/10.3390/
+rs13010052.
+Moreno Casasola, P., Rojas Galaviz, J.L., Z´ arate Lomelí, D., Ortiz P´
+erez, M.A., Lara
+Domínguez, A.L., Saavedra V´
+azquez, T., 2002. Diagn´ ostico de los manglares de
+Veracruz: distribuci´
+on, vínculo con los recursos pesqueros y su problem´ atica.
+Madera y Bosques 8, 61–88. https://doi.org/10.21829/myb.2002.801292.
+Moreno-Casasola, P., 2016. Servicios ecosist´ emicos de las selvas y bosques Costeros de
+Veracruz. In: Journal of Chemical Information and Modeling (INECOL-ITT, Vol. 53,
+Issue 9).
+Pham, T.D., Yokoya, N., Bui, D.T., Yoshino, K., Friess, D.A., 2019. Remote sensing
+approaches for monitoring mangrove species, structure, and biomass: opportunities
+and challenges. Remote Sens. 11 (3), 1–24. https://doi.org/10.3390/rs11030230.
+Plants of the World Online. Facilitated by the Royal Botanic Gardens, Kew. https://powo.
+science.kew.org/Plants of the World Online. Facilitated by the Royal Botanic Gardens,
+Kew. https://powo.science.kew.org/.
+Rahmandhana, A.D., Kamal, M., Wicaksono, P., 2022. Spectral reflectance-based
+mangrove species mapping from WorldView-2 imagery of Karimunjawa and
+Kemujan Island, Central Java Province, Indonesia. Remote Sens. 14 (1). https://doi.
+org/10.3390/rs14010183.
+Rodríguez Zú˜ niga, M.T., Villeda-Ch´
+avez, E., V´ azquez-Lule, A.D., Bejarano, M., Cruz
+L´
+opez, M.I., Olguín, M., Villela Gayt´
+an, S.A., Flores, R., 2018. M´ etodos para la
+caracterizaci´
+on de los manglares mexicanos. In: M´ etodos Para La Caracterizaci´
+on de
+Los Manglares Mexicanos: Un Enfoque Espacial Multiescala, p. 272.
+Rodríguez-Zu˜ niga, M.T., Troche-Souza, C., V´ azquez-Lule, A.D., M´ arquez-Mendoza, J.D.,
+V´ azquez-Balderas, B., Valderrama-Landeros, L.H., Vel´ azquez-Salazar, S., Cruz-
+L´
+opez, M.I., Ressl, R., Uribe-Martínez, A., Cerdeira-Estrada, S., Acosta-Vel´
+azquez, J.,
+Díaz-Gallegos, J., Jim´ enez-Rosenberg, R., Fueyo-Mac Donald, L., Galindo-Leal, C.,
+2013. Manglares de M´ exico: Extensi´
+on, distribuci´
+on y monitoreo. CONABIO. Issue
+December.
+Roy, S., Mahapatra, M., Chakraborty, A., 2019. Mapping and monitoring of mangrove
+along the Odisha coast based on remote sensing and GIS techniques. Model. Earth
+Syst. Environ. 5 (1), 217–226. https://doi.org/10.1007/s40808-018-0529-7.
+Russel, S.J., Norving, P., 2010. Artificial intelligence A Modern Approach (Prentice H).
+https://doi.org/10.1109/ICCAE.2010.5451578.
+Siikam¨ aki, J., Sanchirico, J.N., Jardine, S.L., 2012. Global economic potential for
+reducing carbon dioxide emissions from mangrove loss. Proc. Natl. Acad. Sci. USA
+109 (36), 14369–14374. https://doi.org/10.1073/pnas.1200519109.
+Tran, T.V., Reef, R., Zhu, X., 2022. A review of spectral indices for mangrove remote
+sensing. Remote Sens. 14 (19). https://doi.org/10.3390/rs14194868.
+Trouche, S.C., Rodríguez, Z.M.T., Vel´
+azquez, S.S., Valderrama, L.L., Villeda, C.E.,
+Alc´ antara, M.A., V´
+azquez, B.B., Cruz, L.M.I., Ressl, R., 2016. Manglares De M´ exico
+Extensi´
+on, Distribuci´
+on Y Monitoreo (1970/1980—2015). Comisi´
+on Nacional Para
+El Conocimeinto y Uso de La Biodiversidad, 16.
+Trujillo-Acatitla, R., Tuxpan-Vargas, J., Ovando-V´
+azquez, C., 2022. Oil spills: detection
+and concentration estimation in satellite imagery, a machine learning approach.
+Mar. Pollut. Bull. 184 (2055). https://doi.org/10.1016/j.marpolbul.2022.114132.
+Valderrama-Landeros, L., Flores-de-Santiago, F., Kovacs, J.M., Flores-Verdugo, F., 2018.
+An assessment of commonly employed satellite-based remote sensors for mapping
+mangrove species in Mexico using an NDVI-based classification scheme. Environ.
+Monit. Assess. 190 (1). https://doi.org/10.1007/s10661-017-6399-z.
+V´ azquez-Gonz´ alez, C., Moreno-Casasola, P., Hern´ andez, M.E., Campos, A., Espejel, I.,
+Ferm´ an-Almada, J.L., 2017. Mangrove and freshwater wetland conservation through
+carbon offsets: a cost-benefit analysis for establishing environmental policies.
+Environ. Manag. 59 (2), 274–290. https://doi.org/10.1007/s00267-016-0790-3.
+Vel´
+azquez, J.A., Luna, A.R., 2007. Variaci´
+on en la cobertura, distribuci´
+on y estructura de
+los manglares del complejo lagunar Bahía Magdalena-Bahía Almejas (1990–2005).
+January, pp. 127–142.
+Vel´ azquez-Salazar, S., Rodrígez-Zu˜ niga, M.T., Alc´ antara-Maya, J.A., Villeda-Ch´
+avez, E.,
+Valderrama-Landeros, L., Troche-Souza, C., V´ azquez-Balderas, B., P´ erez-Espinoza, I.,
+Cruz-L´
+opez, M.I., Ressl, R., De la Borbolla, D.V.G., Paz, O., Aguilar-Sierra, V.,
+Hruby, E., Mu˜ noa-Couti˜
+no, J.H., 2021. Manglares de M´ exico: Actualizaci´
+on y
+an´ alisis de los datos 2020 (Comisi´
+on N, Vol. 1). www.biodiversidad.gob.mx/.
+Wang, L., Silv´ an-C´ ardenas, J.L., Sousa, W.P., 2008. Neural network classification of
+mangrove species from multi-seasonal Ikonos imagery. Photogramm. Eng. Remote.
+Sens. 74 (7), 921–927. https://doi.org/10.14358/PERS.74.7.921.
+13
+--- PAGE 14 ---
+M.-M. Erandi et al. Wang, Wan B., Qiu, P., Su, Y., Guo, Q., Wang, R., Sun, F., Wu, X., 2018. Evaluating the
+performance of Sentinel-2, Landsat 8 and Pl´ eiades-1 in mapping mangrove extent
+and species. Remote Sens. 10 (9). https://doi.org/10.3390/rs10091468.
+Xia, J., Yokoya, N., Pham, T.D., 2020. Probabilistic mangrove species mapping with
+multiple-source remote-sensing datasets using label distribution learning in Xuan
+Thuy National Park, Vietnam. Remote Sens. 12 (22), 1–17. https://doi.org/10.3390/
+rs12223834.
+Yang, G., Huang, K., Sun, W., Meng, X., Mao, D., Ge, Y., 2022. Enhanced mangrove
+vegetation index based on hyperspectral images for mapping mangrove. ISPRS J.
+Photogramm. Remote Sens. 189 (January), 236–254. https://doi.org/10.1016/j.
+isprsjprs.2022.05.003.
+Ecological Informatics 85 (2025) 102961
+Zu-Ermagassen, P., Spalding, M., 2021. Rich natural resources. In: Spalding, M.,
+Maric´
+e, L. (Eds.), The State of the World´ S Mangrove 2021. Global Man, pp. 40–41.
+https://doi.org/10.1016/j.jnca.2018.04.004%0Ahttp://aisel.aisnet.org/pacis2007/
+73. https://www.weforum.org/whitepapers/cyber-resilience-in-the-oil-and-gas-ind
+ustry-playbook-for-boards-and-corporate-officers%0A.
+Zulfa, A.W., Norizah, K., Hamdan, O., Faridah-Hanum, I., Rhyma, P.P., Fitrianto, A.,
+2021. Spectral signature analysis to determine mangrove species delineation
+structured by anthropogenic effects. Ecol. Indic. 130 (May), 108148. https://doi.
+org/10.1016/j.ecolind.2021.108148.
+14

@@ -1,0 +1,87 @@
+{
+  "file_name": "DataBase_Sentinel_2_Mangrove_LaMancha.csv",
+  "file_size_mb": 191.04,
+  "total_rows": 1605681,
+  "total_columns": 12,
+  "columns": [
+    "ID_Imagen",
+    "Spp",
+    "Band_2",
+    "Band_3",
+    "Band_4",
+    "Band_5",
+    "Band_6",
+    "Band_7",
+    "Band_8",
+    "Band_8A",
+    "Band_11",
+    "Band_12"
+  ],
+  "unique_images": 147,
+  "pixels_per_image": 10923,
+  "species_distribution": {
+    "Avicennia_germinans": 1441482,
+    "Rhizophora_mangle": 125832,
+    "Laguncularia_racemosa": 38367
+  },
+  "missing_values": {
+    "ID_Imagen": 0,
+    "Spp": 0,
+    "Band_2": 0,
+    "Band_3": 0,
+    "Band_4": 0,
+    "Band_5": 0,
+    "Band_6": 0,
+    "Band_7": 0,
+    "Band_8": 0,
+    "Band_8A": 0,
+    "Band_11": 0,
+    "Band_12": 0
+  },
+  "band_ranges": {
+    "Band_2": {
+      "min": 0.0802,
+      "max": 0.1254
+    },
+    "Band_3": {
+      "min": 0.0601,
+      "max": 0.1147
+    },
+    "Band_4": {
+      "min": 0.04,
+      "max": 0.0936
+    },
+    "Band_5": {
+      "min": 0.0369,
+      "max": 0.6682
+    },
+    "Band_6": {
+      "min": 0.0551,
+      "max": 0.6722
+    },
+    "Band_7": {
+      "min": 0.0615,
+      "max": 0.6805
+    },
+    "Band_8": {
+      "min": 0.0608,
+      "max": 0.3681
+    },
+    "Band_8A": {
+      "min": 0.0236,
+      "max": 0.6878
+    },
+    "Band_11": {
+      "min": 0.0149,
+      "max": 0.6184
+    },
+    "Band_12": {
+      "min": 0.0049,
+      "max": 0.4603
+    }
+  },
+  "non_mangrove_present": false,
+  "binary_60k_present": false,
+  "multiclass_40k_present": false,
+  "data_classification": "DATA-LIMITED (Monospecific Mangroves Only)"
+}

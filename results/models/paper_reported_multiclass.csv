@@ -1,0 +1,11 @@
+Model,Layers,Neurons,Train_Acc,Test_Acc,Notes
+Logistic Regression,0,0,0.767,0.7684,Baseline model (lowest multiclass score)
+MLP 1 Layer (500N),1,500,0.911,0.9065,Top score for 1 hidden layer
+MLP 2 Layers (300N),2,300,0.9575,0.9436,Top score for 2 hidden layers
+MLP 3 Layers (500N),3,500,0.9863,0.9654,Highest test accuracy in paper
+MLP 4 Layers (100N),4,100,0.9662,0.9528,Reported in Section 3.3 / Fig 9B
+MLP 4 Layers (150N),4,150,0.9775,0.9607,Reported in Section 3.3 / Fig 9C
+MLP 4 Layers (300N),4,300,0.9795,0.9602,Reported in Section 3.2 & Fig 8F
+MLP 5 Layers (50N),5,50,0.955,0.9454,"Most reliable model for spatial distribution (Fig 9E, 10E)"
+MLP 5 Layers (150N),5,150,0.981,0.9632,Reported in Section 3.3 / Fig 9E
+MLP 5 Layers (300N),5,300,0.9873,0.9684,Peak multiclass test accuracy

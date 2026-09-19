@@ -1,0 +1,9 @@
+Model,Layers,Neurons,Train_Acc,Test_Acc,Notes
+Logistic Regression,0,0,0.9916,0.991,Baseline model (lowest binary score)
+MLP 1 Layer (300N),1,300,0.9995,0.9988,Top score for 1 hidden layer
+MLP 2 Layers (100N),2,100,0.9994,0.9987,Top score for 2 hidden layers
+MLP 3 Layers (50N),3,50,0.9996,0.9987,Most optimal scores overall (Section 3.2)
+MLP 4 Layers (150N),4,150,0.9993,0.9986,Shared top score for 4 layers
+MLP 4 Layers (300N),4,300,0.9993,0.9986,"Most reliable spatial model (Section 3.3, Fig 7)"
+MLP 5 Layers (50N),5,50,0.9995,0.9988,Shared top score for 5 layers
+MLP 5 Layers (300N),5,300,0.9995,0.9988,Shared top score for 5 layers

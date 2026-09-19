@@ -1,0 +1,6 @@
+Scope,Description,Count
+Explored in Paper,1 to 5 hidden layers x 8 neuron sizes (5 to 500),40 MLPs + 1 Logistic = 41 configurations
+Explicitly Reported in Paper Text/Figures (Binary),"Logistic, 1L-300N, 2L-100N, 3L-50N, 4L-150N/300N, 5L-50N/300N",8 configurations with numerical scores
+Explicitly Reported in Paper Text/Figures (Multiclass),"Logistic, 1L-500N, 2L-300N, 3L-500N, 4L-100N/150N/300N, 5L-50N/150N/300N",10 configurations with numerical scores
+Reproducible from Released Data,ANOVA & Tukey on 3 species across 10 bands; 3-species Monospecific MLP,One-way ANOVA (10 bands) + Tukey (30 pairs) + 41 3-species models
+Data-Limited (Unreleased by Authors),Original 60k binary & 40k 4-class subsets (Non-mangrove missing); Full scene GeoTIFFs,Unavailable in public repository

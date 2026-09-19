@@ -1,0 +1,31 @@
+Band,Band_Name,Group1,Group2,Mean_Diff,p_adj,Lower_CI_95,Upper_CI_95,Reject_H0
+Band_2,Blue (490 nm),Avicennia_germinans,Laguncularia_racemosa,0.0014,0.0,0.0012,0.0015,True
+Band_2,Blue (490 nm),Avicennia_germinans,Rhizophora_mangle,0.0009,0.0,0.0007,0.001,True
+Band_2,Blue (490 nm),Laguncularia_racemosa,Rhizophora_mangle,-0.0005,0.0,-0.0006,-0.0004,True
+Band_3,Green (560 nm),Avicennia_germinans,Laguncularia_racemosa,0.0038,0.0,0.0036,0.0039,True
+Band_3,Green (560 nm),Avicennia_germinans,Rhizophora_mangle,0.0028,0.0,0.0026,0.0029,True
+Band_3,Green (560 nm),Laguncularia_racemosa,Rhizophora_mangle,-0.001,0.0,-0.0011,-0.0008,True
+Band_4,Red (665 nm),Avicennia_germinans,Laguncularia_racemosa,0.0019,0.0,0.0018,0.0021,True
+Band_4,Red (665 nm),Avicennia_germinans,Rhizophora_mangle,0.0016,0.0,0.0014,0.0017,True
+Band_4,Red (665 nm),Laguncularia_racemosa,Rhizophora_mangle,-0.0004,0.0,-0.0005,-0.0002,True
+Band_5,Red Edge 1 (705 nm),Avicennia_germinans,Laguncularia_racemosa,0.0049,0.0,0.0039,0.0059,True
+Band_5,Red Edge 1 (705 nm),Avicennia_germinans,Rhizophora_mangle,-0.0012,0.0119,-0.0021,-0.0002,True
+Band_5,Red Edge 1 (705 nm),Laguncularia_racemosa,Rhizophora_mangle,-0.0061,0.0,-0.0071,-0.0051,True
+Band_6,Red Edge 2 (740 nm),Avicennia_germinans,Laguncularia_racemosa,0.0154,0.0,0.0144,0.0165,True
+Band_6,Red Edge 2 (740 nm),Avicennia_germinans,Rhizophora_mangle,-0.0098,0.0,-0.0109,-0.0088,True
+Band_6,Red Edge 2 (740 nm),Laguncularia_racemosa,Rhizophora_mangle,-0.0253,0.0,-0.0263,-0.0242,True
+Band_7,Red Edge 3 (783 nm),Avicennia_germinans,Laguncularia_racemosa,0.0165,0.0,0.0153,0.0178,True
+Band_7,Red Edge 3 (783 nm),Avicennia_germinans,Rhizophora_mangle,-0.0156,0.0,-0.0169,-0.0143,True
+Band_7,Red Edge 3 (783 nm),Laguncularia_racemosa,Rhizophora_mangle,-0.0321,0.0,-0.0334,-0.0309,True
+Band_8,NIR Broad (842 nm),Avicennia_germinans,Laguncularia_racemosa,0.0256,0.0,0.0245,0.0267,True
+Band_8,NIR Broad (842 nm),Avicennia_germinans,Rhizophora_mangle,0.0225,0.0,0.0214,0.0236,True
+Band_8,NIR Broad (842 nm),Laguncularia_racemosa,Rhizophora_mangle,-0.003,0.0,-0.0042,-0.0019,True
+Band_8A,NIR Narrow (865 nm),Avicennia_germinans,Laguncularia_racemosa,0.0211,0.0,0.0196,0.0225,True
+Band_8A,NIR Narrow (865 nm),Avicennia_germinans,Rhizophora_mangle,-0.0192,0.0,-0.0207,-0.0177,True
+Band_8A,NIR Narrow (865 nm),Laguncularia_racemosa,Rhizophora_mangle,-0.0403,0.0,-0.0417,-0.0388,True
+Band_11,SWIR 1 (1610 nm),Avicennia_germinans,Laguncularia_racemosa,-0.0005,0.5165,-0.0016,0.0006,False
+Band_11,SWIR 1 (1610 nm),Avicennia_germinans,Rhizophora_mangle,-0.0186,0.0,-0.0196,-0.0175,True
+Band_11,SWIR 1 (1610 nm),Laguncularia_racemosa,Rhizophora_mangle,-0.0181,0.0,-0.0191,-0.017,True
+Band_12,SWIR 2 (2190 nm),Avicennia_germinans,Laguncularia_racemosa,-0.0019,0.0,-0.0028,-0.0011,True
+Band_12,SWIR 2 (2190 nm),Avicennia_germinans,Rhizophora_mangle,-0.0088,0.0,-0.0096,-0.0079,True
+Band_12,SWIR 2 (2190 nm),Laguncularia_racemosa,Rhizophora_mangle,-0.0068,0.0,-0.0077,-0.006,True
