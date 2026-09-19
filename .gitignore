@@ -29,6 +29,7 @@ MANIFEST
 
 # Jupyter Notebooks
 .ipynb_checkpoints
+scratch/
 
 # Virtual Environments
 .venv/

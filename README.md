@@ -77,7 +77,8 @@ Mangroves-Blue-Carbon/
 │   ├── 04_three_class_mangrove_mlp.ipynb
 │   ├── 05_paper_models_transcription_and_analysis.ipynb
 │   ├── 06_architecture_comparison.ipynb
-│   └── 07_spatial_validation.ipynb
+│   ├── 07_spatial_validation.ipynb
+│   └── 08_paper_vs_reproduction.ipynb
 │
 ├── src/
 │   ├── config.py
@@ -152,7 +153,7 @@ jupyter notebook
 All notebooks are self-contained, sequential, and pre-populated with executed outputs, tables, and figures.
 
 ### Step 4 (Optional): Execute All Notebooks Headless
-To re-execute all 7 notebooks from top to bottom in a single command:
+To re-execute all 8 notebooks from top to bottom in a single command:
 ```bash
 python run_notebooks.py
 ```

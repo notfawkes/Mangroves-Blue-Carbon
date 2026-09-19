@@ -18,6 +18,7 @@ NOTEBOOKS = [
     "05_paper_models_transcription_and_analysis.ipynb",
     "06_architecture_comparison.ipynb",
     "07_spatial_validation.ipynb",
+    "08_paper_vs_reproduction.ipynb",
 ]
 
 def execute_notebook(nb_name: str, notebooks_dir: Path) -> bool:
