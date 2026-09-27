@@ -126,6 +126,8 @@ Mangroves-Blue-Carbon/
 ├── run_notebooks.py
 ├── REPRODUCTION_SPECIFICATION.md
 ├── FINAL_REPRODUCTION_CHECKLIST.md
+├── GOOGLE_COLAB_GUIDE.md
+├── PRESENTATION_GUIDE.md
 └── README.md
 ```
 
@@ -157,6 +159,11 @@ To re-execute all 8 notebooks from top to bottom in a single command:
 ```bash
 python run_notebooks.py
 ```
+
+### Running in Google Colab (Cloud)
+To run the entire reproduction in Google Colab with free GPU acceleration and automated dataset downloading, follow the dedicated guide:  
+👉 **[GOOGLE_COLAB_GUIDE.md](GOOGLE_COLAB_GUIDE.md)**
+
 
 ---
 
